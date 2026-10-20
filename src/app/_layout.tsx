@@ -1,18 +1,26 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <>
+      <StatusBar style="light" />
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: '#101B2D' },
+          headerTintColor: '#FFFFFF',
+          headerTitleStyle: { fontWeight: '700' },
+          contentStyle: { backgroundColor: '#F4F6FA' },
+        }}
+      >
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="login" options={{ title: 'Masuk', headerShown: false }} />
+        <Stack.Screen name="home" options={{ title: 'NESTORA', headerBackVisible: false }} />
+        <Stack.Screen name="villa" options={{ title: 'Pilihan Vila' }} />
+        <Stack.Screen name="hotel" options={{ title: 'Kamar Hotel' }} />
+        <Stack.Screen name="booking" options={{ title: 'Reservasi Penginapan' }} />
+        <Stack.Screen name="confirmation" options={{ title: 'Reservasi Berhasil', headerBackVisible: false }} />
+      </Stack>
+    </>
   );
 }
